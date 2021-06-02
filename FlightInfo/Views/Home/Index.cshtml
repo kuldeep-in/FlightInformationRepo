@@ -1,8 +1,307 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<FlightInfo.Controllers.RawData>
+
+@{
+    ViewData["Title"] = "Index";
+    var currenttime = DateTime.UtcNow.AddMinutes(330).ToString("dd MMM yyyy  hh:mm:ss tt");
+    var todaysDate = DateTime.UtcNow.AddMinutes(330);
+    var tomorrowsDate = DateTime.UtcNow.AddDays(1).AddMinutes(330);
+    var yesterdaysDate = DateTime.UtcNow.AddDays(-1).AddMinutes(330);
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Status at [@currenttime]  IST</h1>
+
+<button class="tablink" onclick="openCity('day0', this, '#236bff')">@yesterdaysDate.ToString("dd MMM yyyy")</button>
+<button class="tablink" onclick="openCity('day1', this, 'green')" id="defaultOpen">@todaysDate.ToString("dd MMM yyyy")</button>
+<button class="tablink" onclick="openCity('day2', this, '#236bff')">@tomorrowsDate.ToString("dd MMM yyyy")</button>
+
+<div id="day0" class="tabcontent">
+    <h1>@yesterdaysDate.ToString("dd MMM yyyy")</h1>
+    <p>@yesterdaysDate.DayOfWeek</p>
+
+    <table class="table table-bordered" style="color:white">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayNameFor(model => model.Airline)
+                </th>
+                <th>
+                    @Html.DisplayName("Flight")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    @Html.DisplayNameFor(model => model.STD)
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    @Html.DisplayNameFor(model => model.ATD)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.STA)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(x => x.STA.Day == yesterdaysDate.Day))
+            {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayFor(modelItem => item.Airline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    @Html.DisplayFor(modelItem => item.STD)
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    @Html.DisplayFor(modelItem => item.ATD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STA)
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+<div id="day1" class="tabcontent">
+    <h1>@todaysDate.ToString("dd MMM yyyy")</h1>
+    <p>@todaysDate.DayOfWeek</p>
+
+    <table class="table table-bordered" style="color:white">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayNameFor(model => model.Airline)
+                </th>
+                <th>
+                    @Html.DisplayName("Flight")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    @Html.DisplayNameFor(model => model.STD)
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    @Html.DisplayNameFor(model => model.ATD)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.STA)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(x=>x.STA.Day == todaysDate.Day))
+            {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayFor(modelItem => item.Airline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    @Html.DisplayFor(modelItem => item.STD)
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    @Html.DisplayFor(modelItem => item.ATD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STA)
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="day2" class="tabcontent">
+    <h1>@tomorrowsDate.ToString("dd MMM yyyy")</h1>
+    <p>@tomorrowsDate.DayOfWeek</p>
+
+    <table class="table table-bordered" style="color:white">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayNameFor(model => model.Airline)
+                </th>
+                <th>
+                    @Html.DisplayName("Flight")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    @Html.DisplayNameFor(model => model.STD)
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    @Html.DisplayNameFor(model => model.ATD)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.STA)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(x => x.STA.Day == tomorrowsDate.Day))
+            {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayFor(modelItem => item.Airline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td class="d-none d-lg-block d-xl-block">
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    @Html.DisplayFor(modelItem => item.STD)
+                </td>
+                <td class="d-none d-sm-table-cell">
+                    @Html.DisplayFor(modelItem => item.ATD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STA)
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function openCity(cityName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+
+        // Show the specific tab content
+        document.getElementById(cityName).style.display = "block";
+
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = color;
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+
+<style>
+    /* Style the tab buttons */
+    .tablink {
+        background-color: #555;
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.3%;
+    }
+
+        /* Change background color of buttons on hover */
+        .tablink:hover {
+            background-color: #777;
+        }
+
+    /* Set default styles for tab content */
+    .tabcontent {
+        color: white;
+        display: none;
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Style each tab content individually */
+    #day0 {
+        background-color: #236bff;
+    }
+
+    #day1 {
+        background-color: green;
+    }
+
+    #day2 {
+        background-color: #236bff;
+    }
+</style>
