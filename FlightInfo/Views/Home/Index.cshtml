@@ -54,7 +54,6 @@
             @foreach (var item in Model.Where(x => x.STA.Day == yesterdaysDate.Day))
             {
             <tr>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -82,7 +81,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.STA)
                 </td>
-
             </tr>
             }
         </tbody>
@@ -122,14 +120,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.STA)
                 </th>
-
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Where(x=>x.STA.Day == todaysDate.Day))
             {
             <tr>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -157,7 +153,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.STA)
                 </td>
-
             </tr>
             }
         </tbody>
@@ -167,7 +162,6 @@
 <div id="day2" class="tabcontent">
     <h1>@tomorrowsDate.ToString("dd MMM yyyy")</h1>
     <p>@tomorrowsDate.DayOfWeek</p>
-
     <table class="table table-bordered" style="color:white">
         <thead>
             <tr>
@@ -197,14 +191,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.STA)
                 </th>
-
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Where(x => x.STA.Day == tomorrowsDate.Day))
             {
             <tr>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -232,7 +224,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.STA)
                 </td>
-
             </tr>
             }
         </tbody>
@@ -240,31 +231,6 @@
 </div>
 
 <script>
-    function openCity(cityName, elmnt, color) {
-        // Hide all elements with class="tabcontent" by default */
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Remove the background color of all tablinks/buttons
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-        }
-
-        // Show the specific tab content
-        document.getElementById(cityName).style.display = "block";
-
-        // Add the specific color to the button used to open the tab content
-        elmnt.style.backgroundColor = color;
-    }
-
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 </script>
-
-<style>
-    
-</style>
