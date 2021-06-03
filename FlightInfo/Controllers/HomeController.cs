@@ -22,7 +22,7 @@ namespace FlightInfo.Controllers
 
         public IActionResult Index()
         {
-            var resultdataList = new List<RawData>();
+            var resultdataList = new List<RawDataModel>();
             System.Net.WebClient webClient = new System.Net.WebClient
             {
                 Encoding = System.Text.Encoding.UTF8
@@ -43,9 +43,9 @@ namespace FlightInfo.Controllers
             return View(resultdataList.OrderBy(x => x.STA));
         }
 
-        public static List<RawData> GetData(string numberurl, string day1, string day2, string name, string airline, string flightnumber, long timediff)
+        public static List<RawDataModel> GetData(string numberurl, string day1, string day2, string name, string airline, string flightnumber, long timediff)
         {
-            var dataList = new List<RawData>();
+            var dataList = new List<RawDataModel>();
             System.Net.WebClient webClient = new System.Net.WebClient
             {
                 Encoding = System.Text.Encoding.UTF8
@@ -84,7 +84,7 @@ namespace FlightInfo.Controllers
                         if (nodes[8].InnerText.Trim() != "&mdash;")
                             atdstring = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(nodes[8].Attributes["data-timestamp"].Value)).AddMinutes(timediff).ToString("hh:mm tt");
 
-                        dataList.Add(new RawData
+                        dataList.Add(new RawDataModel
                         {
                             Name = name,
                             Airline = airline,
@@ -114,31 +114,5 @@ namespace FlightInfo.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
-
-    public class RawData
-    {
-        public string Name { get; set; }
-        public string Date { get; set; }
-        public string From { get; set; }
-        public string To { get; set; }
-        public string Aircraft { get; set; }
-        public string FlightTime { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset STD { get; set; }
-
-        //[DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
-        public string ATD { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset STA { get; set; }
-
-        //[DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
-        public string Status { get; set; }
-
-        public string Airline { get; set; }
-
-        public string FlightNumber { get; set; }
     }
 }

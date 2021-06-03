@@ -69,3 +69,42 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Style the tab buttons */
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 33.3%;
+}
+
+    /* Change background color of buttons on hover */
+    .tablink:hover {
+        background-color: #777;
+    }
+
+/* Set default styles for tab content */
+.tabcontent {
+    color: white;
+    display: none;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style each tab content individually */
+#day0 {
+    background-color: #236bff;
+}
+
+#day1 {
+    background-color: green;
+}
+
+#day2 {
+    background-color: #236bff;
+}
